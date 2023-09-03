@@ -10,6 +10,7 @@ function startGame() {
     let countDownTimerId
     let currentTime = 10
     timeLeft.textContent = currentTime
+    scoreDisplay.textContent = result
     function randomSquare() {
         squares.forEach(square => {
             square.classList.remove('mole')
@@ -19,16 +20,17 @@ function startGame() {
 
         hitPosition = randomPosition.id
     }
-
+    
+    function squareClickHandler() {
+        if (this.id === hitPosition) {
+            result++;
+            scoreDisplay.textContent = result;
+            hitPosition = null;
+        }
+    }
     squares.forEach(square => {
-        square.addEventListener('mousedown', () => {
-            if (square.id === hitPosition) {
-                result++
-                scoreDisplay.textContent = result
-                hitPosition = NULL
-            }
-        })
-    })
+        square.addEventListener('mousedown', squareClickHandler);
+    });
 
     function moveMole() {
         timerId = setInterval(randomSquare, 600);
@@ -43,6 +45,9 @@ function startGame() {
             clearInterval(countDownTimerId)
             alert("Game Over !! Your Final score is: " + result)
             clearInterval(timerId)
+            squares.forEach(square => {
+                square.removeEventListener('mousedown', squareClickHandler);
+            });
             timeLeft.textContent = 0;
         }
     }
@@ -57,7 +62,7 @@ function clicker()
 }
 function game() {
 
-   setInterval(clicker,10000)
+   setInterval(clicker,11000)
 
    if(clicked)
    {
