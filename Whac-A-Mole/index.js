@@ -8,7 +8,8 @@ function startGame() {
     let timerId
     let hitPosition
     let countDownTimerId
-    let currentTime = 60
+    let currentTime = 10
+    timeLeft.textContent = currentTime
     function randomSquare() {
         squares.forEach(square => {
             square.classList.remove('mole')
@@ -47,4 +48,25 @@ function startGame() {
     }
 
     countDownTimerId = setInterval(countDown, 1000)
+}
+
+var clicked = true;
+function clicker()
+{
+    clicked = true;
+}
+function game() {
+
+   setInterval(clicker,10000)
+
+   if(clicked)
+   {
+    startGame();
+    clicked = false
+   }
+   else
+   {
+    alert("Error !!")
+   }
+  
 }
